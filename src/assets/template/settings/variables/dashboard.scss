@@ -1,0 +1,11 @@
+$sidebar-width: 280px;
+$collapse-sidebar-width: 64px;
+$sidebar-bg-color: #1e1e2d;
+$sidebar-hover-bg-color: darken($sidebar-bg-color,3);
+$sidebar-header-height: 65px;
+$sidebar-header-bg-color: darken($sidebar-bg-color, 3);
+$sidebar-item-color:#a2a3b7;
+$sidebar-hover-item-color:lighten($sidebar-item-color,20);
+
+$header-height: $sidebar-header-height;
+$sub-header-height: 54px;

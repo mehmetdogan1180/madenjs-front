@@ -1,0 +1,17 @@
+.login-container {
+  background: #f1f1f1;
+  min-height: 100vh;
+  .left-wrap{
+    background: url("~@/assets/images/login-bg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .login-wrap {
+    min-height: 100vh;
+    margin-left: auto;
+    background: #fff;
+    padding: 0 40px;
+  }
+}

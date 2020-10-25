@@ -1,0 +1,55 @@
+.md-basic-form {
+  width: 100%;
+  .el-form-item{
+    margin-bottom: 1em;
+  }
+  .el-form-item__label,
+  .el-form-item__content{
+    line-height: 1.2;
+    margin-bottom: .5rem;
+    width: 100%;
+    text-align: left;
+  }
+  //Checkbox
+  .el-checkbox__inner{
+    width: 19px;
+    height: 19px;
+    &:after{
+      border: 2px solid #FFFFFF;
+      border-left: 0;
+      border-top: 0;
+      height: 12px;
+      left: 6px;
+    }
+  }
+
+  //Cascader
+  .el-cascader{
+    width: 100%;
+  }
+
+  //Select
+  .el-select{
+    width: 100%;
+  }
+
+  //Date
+  .el-date-editor{
+    width: 100%;
+  }
+
+  //Upload
+  .el-upload,
+  .el-upload-dragger
+  {
+    width: 100%;
+  }
+
+  //İnput Number
+  .el-input-number{
+    width: 100%;
+    input{
+      text-align: left;
+    }
+  }
+}
