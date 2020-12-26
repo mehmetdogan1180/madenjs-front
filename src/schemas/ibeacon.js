@@ -8,9 +8,7 @@ export const form = () => {
     {
       name: 'mac_address',
       label: 'Mac Adresi',
-      rules: 'required|min:17',
-      type: 'mask',
-      mask: 'XX:XX:XX:XX:XX:XX',
+      rules: 'required|max:18',
     },
     {
       name: 'state',
