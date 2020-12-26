@@ -11,7 +11,7 @@ const ifNotAuthenticated = (to, from, next) => { // Giriş yapılmışsa anasayf
 };
 const ifAuthenticated = (to, from, next) => { // Giriş yapılmış mı kontrol et yoksa girişe yönlendir
   if (store.getters.getToken) {
-    Vue.prototype.$socket = io('78.186.1.239:3000');
+    Vue.prototype.$socket = io();
     next();
   } else next({ name: 'login' });
 };
