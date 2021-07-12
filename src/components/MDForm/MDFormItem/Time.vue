@@ -1,18 +1,14 @@
 <template>
   <validation-provider :name="label" :rules="rules" v-slot="{ errors }">
     <el-form-item :label="label" :class="{'is-error':errors[0]}">
-      <el-radio-group
+      <el-time-picker
         v-model="val"
+        :placeholder="placeholder ? placeholder : label"
+        :value-format="'HH:mm'"
+        :format="'HH:mm'"
         @input="$emit('input', val)"
-      >
-        <el-radio
-          v-for="item in options"
-          :key="item.value"
-          :label="item.value"
-        >
-          {{item.label}}
-        </el-radio>
-      </el-radio-group>
+        v-bind="attrs"
+      />
       <div class="el-form-item__error">
         {{errors[0]}}
       </div>
@@ -22,14 +18,10 @@
 
 <script>
 export default {
-  name: 'MDRadio',
+  name: 'MDTime',
   props: {
-    options: {
-      type: Array,
-      default: () => [],
-    },
     value: {
-      type: [String, Number],
+      type: [String, Date],
       default: null,
     },
     label: {
@@ -40,13 +32,13 @@ export default {
       type: String,
       default: '',
     },
+    placeholder: {
+      type: String,
+      default: '',
+    },
     attrs: {
       type: Object,
       default: () => {},
-    },
-    default: {
-      type: [String, Number],
-      default: '',
     },
   },
   data() {
@@ -54,15 +46,9 @@ export default {
       val: this.value,
     };
   },
-  mounted() {
-    this.val = [undefined, null].includes(this.value) ? this.default : this.value;
-  },
   watch: {
-    value: {
-      immediate: true,
-      handler(val) {
-        this.val = val;
-      },
+    value(val) {
+      this.val = val;
     },
   },
 };

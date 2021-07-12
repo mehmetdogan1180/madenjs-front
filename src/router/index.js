@@ -11,7 +11,7 @@ const ifNotAuthenticated = (to, from, next) => { // Giriş yapılmışsa anasayf
 };
 const ifAuthenticated = (to, from, next) => { // Giriş yapılmış mı kontrol et yoksa girişe yönlendir
   if (store.getters.getToken) {
-    Vue.prototype.$socket = io();
+    Vue.prototype.$socket = io('http://localhost:8883/');
     next();
   } else next({ name: 'login' });
 };
@@ -126,74 +126,116 @@ export const routeMap = [{
     title: 'Personel Yönetimi',
     icon: 'el-icon-user',
   },
-  children: [{
-    path: 'list',
-    name: 'staffList',
-    component: () => import('@/views/List/Default'),
-    meta: {
-      title: 'Personeller',
-      configName: 'staff',
-    },
-  },
-  {
-    path: 'form',
-    name: 'staffForm',
-    component: () => import('@/views/Form/Basic'),
-    meta: {
-      title: 'Yeni Personel',
-      configName: 'staff',
-    },
-  },
-  {
-    path: 'form/:id',
-    name: 'staffEditForm',
-    component: () => import('@/views/Form/Basic'),
-    hidden: true,
-    meta: {
-      title: 'Personel Düzenle',
-      configName: 'staff',
-    },
-  },
-  {
-    path: 'title',
-    name: 'title',
-    redirect: { name: 'titleList' },
-    component: {
-      render(c) { return c('router-view'); },
-    },
-    meta: {
-      title: 'Unvan Yönetimi',
-    },
-    children: [{
+  children: [
+    {
       path: 'list',
-      name: 'titleList',
+      name: 'staffList',
       component: () => import('@/views/List/Default'),
       meta: {
-        title: 'Unvanlar',
-        configName: 'title',
+        title: 'Personeller',
+        configName: 'staff',
       },
     },
     {
       path: 'form',
-      name: 'titleForm',
+      name: 'staffForm',
       component: () => import('@/views/Form/Basic'),
       meta: {
-        title: 'Yeni Unvan',
-        configName: 'title',
+        title: 'Yeni Personel',
+        configName: 'staff',
       },
     },
     {
       path: 'form/:id',
-      name: 'titleEditForm',
+      name: 'staffEditForm',
       component: () => import('@/views/Form/Basic'),
       hidden: true,
       meta: {
-        title: 'Unvan Düzenle',
-        configName: 'title',
+        title: 'Personel Düzenle',
+        configName: 'staff',
       },
     },
-    ],
-  },
+    {
+      path: 'title',
+      name: 'title',
+      redirect: { name: 'titleList' },
+      component: {
+        render(c) { return c('router-view'); },
+      },
+      meta: {
+        title: 'Unvan Yönetimi',
+      },
+      children: [{
+        path: 'list',
+        name: 'titleList',
+        component: () => import('@/views/List/Default'),
+        meta: {
+          title: 'Unvanlar',
+          configName: 'title',
+        },
+      },
+      {
+        path: 'form',
+        name: 'titleForm',
+        component: () => import('@/views/Form/Basic'),
+        meta: {
+          title: 'Yeni Unvan',
+          configName: 'title',
+        },
+      },
+      {
+        path: 'form/:id',
+        name: 'titleEditForm',
+        component: () => import('@/views/Form/Basic'),
+        hidden: true,
+        meta: {
+          title: 'Unvan Düzenle',
+          configName: 'title',
+        },
+      },
+      ],
+    },
+    {
+      path: 'shift-period',
+      name: 'shiftPeriod',
+      redirect: { name: 'shiftPeriodList' },
+      component: {
+        render(c) { return c('router-view'); },
+      },
+      meta: {
+        title: 'Vardiya Yönetimi',
+      },
+      children: [
+        {
+          path: 'list',
+          name: 'shiftPeriodList',
+          component: () => import('@/views/List/Default'),
+          meta: {
+            title: 'Vardiyalar',
+            configName: 'shiftPeriod',
+          },
+        },
+        {
+          path: 'form',
+          name: 'shiftPeriodForm',
+          component: () => import('@/views/Form/Basic'),
+          meta: {
+            title: 'Yeni Vardiya',
+            configName: 'shiftPeriod',
+          },
+        },
+        {
+          path: 'form/:id',
+          name: 'shiftPeriodEditForm',
+          component: () => import('@/views/Form/Basic'),
+          hidden: true,
+          meta: {
+            title: 'Vardiya Düzenle',
+            configName: 'shiftPeriod',
+          },
+        },
+      ],
+    },
   ],
 },
 {
@@ -248,34 +290,76 @@ export const routeMap = [{
     title: 'Ibeacon Yönetimi',
     icon: 'el-icon-user',
   },
-  children: [{
-    path: 'list',
-    name: 'ibeaconList',
-    component: () => import('@/views/List/Default'),
-    meta: {
-      title: 'Ibeaconlar',
-      configName: 'ibeacon',
+  children: [
+    {
+      path: 'list',
+      name: 'ibeaconList',
+      component: () => import('@/views/List/Default'),
+      meta: {
+        title: 'Ibeaconlar',
+        configName: 'ibeacon',
+      },
     },
-  },
-  {
-    path: 'form',
-    name: 'ibeaconForm',
-    component: () => import('@/views/Form/Basic'),
-    meta: {
-      title: 'Yeni Ibeacon',
-      configName: 'ibeacon',
+    {
+      path: 'form',
+      name: 'ibeaconForm',
+      component: () => import('@/views/Form/Basic'),
+      meta: {
+        title: 'Yeni Ibeacon',
+        configName: 'ibeacon',
+      },
     },
-  },
-  {
-    path: 'form/:id',
-    name: 'ibeaconEditForm',
-    component: () => import('@/views/Form/Basic'),
-    hidden: true,
-    meta: {
-      title: 'Ibeacon Düzenle',
-      configName: 'ibeacon',
+    {
+      path: 'form/:id',
+      name: 'ibeaconEditForm',
+      component: () => import('@/views/Form/Basic'),
+      hidden: true,
+      meta: {
+        title: 'Ibeacon Düzenle',
+        configName: 'ibeacon',
+      },
     },
-  },
+    /* {
+      path: 'ibeacon-group',
+      name: 'ibeaconGroup',
+      redirect: { name: 'ibeaconGroupList' },
+      component: {
+        render(c) { return c('router-view'); },
+      },
+      meta: {
+        title: 'Grup Yönetimi',
+      },
+      children: [
+        {
+          path: 'list',
+          name: 'ibeaconGroupList',
+          component: () => import('@/views/List/Default'),
+          meta: {
+            title: 'Gruplar',
+            configName: 'ibeaconGroup',
+          },
+        },
+        {
+          path: 'form',
+          name: 'ibeaconGroupForm',
+          component: () => import('@/views/Form/Basic'),
+          meta: {
+            title: 'Yeni Grup',
+            configName: 'ibeaconGroup',
+          },
+        },
+        {
+          path: 'form/:id',
+          name: 'ibeaconGroupEditForm',
+          component: () => import('@/views/Form/Basic'),
+          hidden: true,
+          meta: {
+            title: 'Grup Düzenle',
+            configName: 'ibeaconGroup',
+          },
+        },
+      ],
+    }, */
   ],
 },
 {

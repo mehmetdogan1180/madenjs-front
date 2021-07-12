@@ -5,7 +5,7 @@ import store from '@/store';
 
 // TODO: Ayarlar tek bir yere taşınacak
 const service = axios.create({
-  baseURL: '/api/',
+  baseURL: 'http://localhost:8883/api/',
   timeout: 5000,
 });
 
@@ -15,10 +15,7 @@ service.interceptors.request.use(
     config.headers.authorization = `Bearer ${store.getters.getToken}`;
     return config;
   },
-  (error) => {
-    console.log('request before', error); // for debug
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 // response interceptor

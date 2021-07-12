@@ -64,6 +64,58 @@ export const form = () => {
         },
       },
     ],
+    [
+      {
+        name: 'tc',
+        label: 'TC',
+        type: 'mask',
+        mask: '###########',
+        rules: 'length:11',
+      },
+      {
+        name: 'phone',
+        label: 'Telefon',
+      },
+      {
+        name: 'email',
+        label: 'E-Posta',
+        rules: 'email',
+      },
+    ],
+    [
+      {
+        name: 'work_start_date',
+        label: 'İşe Giriş Tarihi',
+        type: 'date',
+      },
+      {
+        name: 'work_relase_date',
+        label: 'İşten Ayrılma Tarihi',
+        type: 'date',
+      },
+    ],
+    {
+      name: 'address',
+      label: 'Adres',
+      type: 'textarea',
+    },
+    {
+      name: 'is_active',
+      label: 'Durum',
+      rules: 'required',
+      type: 'radio',
+      default: 1,
+      options: [
+        {
+          label: 'Aktif',
+          value: 1,
+        },
+        {
+          label: 'Pasif',
+          value: 0,
+        },
+      ],
+    },
   ];
   return schema;
 };

@@ -49,6 +49,7 @@ const MdDate = () => import('@/components/MDForm/MDFormItem/Date');
 const MdNumber = () => import('@/components/MDForm/MDFormItem/Number');
 const MdRadio = () => import('@/components/MDForm/MDFormItem/Radio');
 const MdTag = () => import('@/components/MDForm/MDFormItem/Tag');
+const MdTime = () => import('@/components/MDForm/MDFormItem/Time');
 export default {
   name: 'MDForm',
   components: {
@@ -68,6 +69,7 @@ export default {
     MdNumber,
     MdRadio,
     MdTag,
+    MdTime,
   },
   data() {
     return {
@@ -101,9 +103,12 @@ export default {
     },
   },
   watch: {
-    value(model) {
-      this.model = model;
-      this.createModel(this.getSchema);
+    value: {
+      immediate: true,
+      handler(model) {
+        this.model = model;
+        this.createModel(this.getSchema);
+      },
     },
   },
   methods: {
@@ -126,7 +131,7 @@ export default {
             this.createModel(c);
           } else if (c.name) {
             if (!c.schema) {
-              this.$set(this.newModel, c.name, this.value[c.name] || (this.value[c.name] === false ? false : ''));
+              this.$set(this.newModel, c.name, this.value[c.name] || (this.value[c.name] === false ? false : null));
             } else {
               this.$set(this.newModel, c.name, this.value[c.name] || this.value[c.name] || {});
             }

@@ -5,6 +5,7 @@
         v-model="val"
         type="date"
         :format="'dd/MM/yyyy'"
+        value-format="yyyy-MM-dd"
         :placeholder="placeholder ? placeholder : label"
         @input="$emit('input', val)"
         v-bind="attrs"
@@ -22,7 +23,7 @@ export default {
   props: {
     value: {
       type: [String, Date],
-      default: '',
+      default: null,
     },
     label: {
       type: String,

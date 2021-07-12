@@ -5,11 +5,30 @@ export const form = () => {
       label: 'İsim',
       rules: 'required',
     },
-    {
-      name: 'mac_address',
-      label: 'Mac Adresi',
-      rules: 'required|max:18',
-    },
+    [
+      {
+        name: 'mac_address',
+        label: 'Mac Adresi',
+        rules: 'required|max:18',
+      },
+      {
+        name: 'group_id',
+        label: 'Grup',
+        rules: 'required',
+        type: 'select',
+        options: {
+          api: {
+            request: {
+              url: '/ibeacon-group',
+            },
+            relations: {
+              label: 'name',
+              value: 'id',
+            },
+          },
+        },
+      },
+    ],
     {
       name: 'state',
       label: 'Aktif',
@@ -30,6 +49,10 @@ export const list = () => {
       label: 'Mac Adresi',
       name: 'mac_address',
       sortable: true,
+    },
+    {
+      label: 'Grup',
+      name: 'group.name',
     },
     {
       label: 'Durum',
