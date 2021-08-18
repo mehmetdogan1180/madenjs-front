@@ -48,8 +48,11 @@ export default {
     };
   },
   watch: {
-    value(val) {
-      this.val = val;
+    value: {
+      immediate: true,
+      handler(val) {
+        this.val = val;
+      },
     },
   },
 };
