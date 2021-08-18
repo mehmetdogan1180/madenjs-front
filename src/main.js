@@ -19,6 +19,7 @@ Object.keys(rules).forEach((rule) => {
   });
 });
 Vue.prototype.$request = request;
+moment.locale('tr');
 Vue.prototype.$moment = moment;
 Vue.config.productionTip = false;
 Vue.use(Element, { locale });

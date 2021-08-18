@@ -156,6 +156,23 @@ export const routeMap = [{
       },
     },
     {
+      path: 'scorings',
+      name: 'staffScorings',
+      component: () => import('@/views/Staff/Scorings'),
+      meta: {
+        title: 'Personel Puantaj',
+      },
+    },
+    {
+      path: 'scoring/:id',
+      name: 'staffScoring',
+      component: () => import('@/views/Staff/Scoring'),
+      hidden: true,
+      meta: {
+        title: 'Personel Puantajı',
+      },
+    },
+    {
       path: 'title',
       name: 'title',
       redirect: { name: 'titleList' },
