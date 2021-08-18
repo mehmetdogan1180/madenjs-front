@@ -21,7 +21,7 @@ Object.keys(rules).forEach((rule) => {
 Vue.prototype.$request = request;
 moment.locale('tr');
 Vue.prototype.$moment = moment;
-Vue.config.productionTip = false;
+Vue.config.productionTip = process.env.NODE_ENV === 'production';
 Vue.use(Element, { locale });
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);

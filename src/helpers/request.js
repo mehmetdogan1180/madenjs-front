@@ -5,7 +5,7 @@ import store from '@/store';
 
 // TODO: Ayarlar tek bir yere taşınacak
 const service = axios.create({
-  baseURL: 'http://localhost:8883/api/',
+  baseURL: process.env.VUE_APP_API_BASE_URL,
   timeout: 5000,
 });
 
