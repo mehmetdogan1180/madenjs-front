@@ -7,6 +7,16 @@
       <span class="card-title">
         {{page.title}}
       </span>
+      <div class="float-right">
+          <el-button
+            type="primary"
+            size="small"
+            icon="el-icon-refresh"
+            @click="mqttRestart"
+          >
+            MQTT Restart
+          </el-button>
+      </div>
     </div>
     <el-table
       :data="$store.getters.monitoring"
@@ -34,6 +44,8 @@
 </template>
 
 <script>
+import { getRestartMqtt } from '@/api/mqtt';
+
 export default {
   name: 'MonitoringList',
   components: {
@@ -52,6 +64,19 @@ export default {
     };
   },
   methods: {
+    async mqttRestart() {
+      try {
+        this.page.loading = true;
+        await this.$request({
+          method: 'get',
+          ...getRestartMqtt(),
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.page.loading = false;
+      }
+    },
   },
 };
 </script>
