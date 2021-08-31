@@ -45,6 +45,9 @@ export default {
         this.$socket.on('changedTrackerLocation', (payload) => {
           this.$store.dispatch('changedTrackerLocation', payload);
         });
+        this.$socket.on('trackerDisconnected', (trackerId) => {
+          this.$store.dispatch('trackerDisconnected', trackerId);
+        });
         /* setInterval(() => {
           this.$store.dispatch('changedTrackerLocation', {
             ibeacon_id: this.getRndInteger(1, 4),

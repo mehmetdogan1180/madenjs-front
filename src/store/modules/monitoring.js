@@ -19,7 +19,7 @@ export default {
     trackers: (state) => state.trackers,
     staffs: (state) => state.staffs,
     // eslint-disable-next-line max-len
-    monitoring: (state) => Object.keys(state.monitoring).map((trackerId) => state.monitoring[trackerId]).filter((i) => i.ibeaconId),
+    monitoring: (state) => Object.keys(state.monitoring).map((trackerId) => state.monitoring[trackerId]).filter((i) => i.ibeaconId && +i.rssi !== 0),
   },
   mutations: {
     setIbeacons(state, payload) {
@@ -39,6 +39,9 @@ export default {
         // eslint-disable-next-line max-len
         state.monitoring[payload.trackerId] = { ...state.monitoring[payload.trackerId], ...payload };
       }
+    },
+    deleteTracker(state, trackerId) {
+      state.monitoring[trackerId].rssi = 0;
     },
   },
   actions: {
@@ -107,6 +110,7 @@ export default {
             ibeaconId: null,
             ibeaconName: null,
             lastChangedTime: null,
+            rssi: null,
           };
           const today = historyToday.find((i) => i.tracker_id === staff.tracker_id);
           if (today) {
@@ -115,61 +119,12 @@ export default {
               monitoring[staff.tracker_id].ibeaconId = today.ibeacon_id;
               monitoring[staff.tracker_id].ibeaconName = ibeacon.name;
               monitoring[staff.tracker_id].lastChangedTime = today.created_at;
+              monitoring[staff.tracker_id].rssi = today.rssi;
             }
           }
           return staff;
         });
-        /* const demo = [
-          {
-            id: 1,
-            name: 'Mehmet',
-            surname: 'Doğan',
-            tracker_id: 5,
-            tracker: {
-              name: 'Tracker 1',
-            },
-            title: {
-              name: 'Personel',
-            },
-          },
-          {
-            id: 2,
-            name: 'Fatih',
-            surname: 'Şahin',
-            tracker_id: 6,
-            tracker: {
-              name: 'Tracker 2',
-            },
-            title: {
-              name: 'Personel 2',
-            },
-          },
-          {
-            id: 3,
-            name: 'Özgür',
-            surname: 'Yılmaz',
-            tracker_id: 7,
-            tracker: {
-              name: 'Tracker 2',
-            },
-            title: {
-              name: 'Personel 2',
-            },
-          },
-        ];
-        demo.map((staff) => {
-          monitoring[staff.tracker_id] = {
-            id: staff.id,
-            name: staff.name,
-            surname: staff.surname,
-            trackerId: staff.tracker_id,
-            trackerName: staff.tracker.name,
-            title: staff.title.name,
-            ibeaconId: null,
-            ibeaconName: null,
-            lastChangedTime: null,
-          };
-        }); */
+
         commit('setMonitoring', monitoring);
         return Promise.resolve();
       } catch (e) {
@@ -208,11 +163,16 @@ export default {
           ibeaconId: ibeacon.id,
           ibeaconName: ibeacon.name,
           lastChangedTime: new Date(),
+          rssi: payload.rssi,
         };
         commit('changeLocation', location);
       } catch (e) {
         console.log(e);
       }
+    },
+
+    trackerDisconnected({ commit }, trackerId) {
+      commit('deleteTracker', trackerId);
     },
   },
 
